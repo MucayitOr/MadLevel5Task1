@@ -1,7 +1,6 @@
 package com.example.madlevel5task1
 
 import android.content.Context
-import android.provider.ContactsContract
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -12,8 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-
-@Database(entities = [ContactsContract.CommonDataKinds.Note::class], version = 1, exportSchema = false)
+@Database(entities = [Note::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class NotepadRoomDatabase : RoomDatabase() {
 
@@ -39,15 +37,12 @@ abstract class NotepadRoomDatabase : RoomDatabase() {
                                     super.onCreate(db)
                                     INSTANCE?.let { database ->
                                         CoroutineScope(Dispatchers.IO).launch {
-                                            database.noteDao().insertNote(
-                                                ContactsContract.CommonDataKinds.Note(
-                                                    "Title",
-                                                    Date(),
-                                                    ""))
+                                            database.noteDao().insertNote(Note("Title", Date(), ""))
                                         }
                                     }
                                 }
                             })
+
                             .build()
                     }
                 }

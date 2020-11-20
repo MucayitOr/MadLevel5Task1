@@ -1,7 +1,6 @@
 package com.example.madlevel5task1
 
 import android.content.Context
-import android.provider.ContactsContract
 import androidx.lifecycle.LiveData
 
 class NoteRepository(context: Context) {
@@ -13,11 +12,11 @@ class NoteRepository(context: Context) {
         noteDao = database!!.noteDao()
     }
 
-    fun getNotepad(): LiveData<ContactsContract.CommonDataKinds.Note?> {
+    fun getNotepad(): LiveData<Note?> {
         return noteDao.getNotepad()
     }
 
-    suspend fun updateNotepad(note: ContactsContract.CommonDataKinds.Note) {
+    suspend fun updateNotepad(note: Note) {
         noteDao.updateNote(note)
     }
 
